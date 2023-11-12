@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products by Tag</title>
+</head>
+<body>
+    <h2>Products by Tag{% if tag %}: {{ tag.name }}{% endif %}</h2>
+    {% for product in products %}
+        <p>{{ product.name }}</p>
+        <p>{{ product.tags }}</p>
+    {% endfor %}
+</body>
+</html>
