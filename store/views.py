@@ -4,14 +4,10 @@ from .models import *
 
 from .forms import OrderForm
 
-def sort_products_by_tag(request, tag_name):
-    tag = get_object_or_404(TagCL, name=tag_name)
-    products = ProductCL.objects.filter(tag=tag)
-    context = {"products": products, "tag":tag}
-    return render(request, "products_by_tag.html", context)
+def all_products(request):
+    products = ProductCL.objects.all()
+    return render(request, 'all_products.html', {'products': products})
 
-def show_error_page(request):
-    return render(request, "error.html")
 
 class ProductView(ListView):
     model = ProductCL
@@ -25,3 +21,12 @@ class OrderCreateView(CreateView):
     success_url = '/'
     template_name = 'create_order.html'
 
+def products_by_tag(request, tag_name=None):
+    if tag_name:
+        tag = get_object_or_404(TagCL, name=tag_name)
+        productis = ProductCL.objects.filter(tags=tag)
+    else:
+        tag = None
+        productis = ProductCL.objects.all()
+
+    return render(request, 'products_by_tag.html', {'tag': tag, 'products': productis})
