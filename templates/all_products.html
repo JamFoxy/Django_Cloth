@@ -1,23 +1,10 @@
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <title>All Products</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <h2>All Products</h2>-->
-<!--    {% for i in tags %}-->
-<!--    <form action="{% url 'products_by_tag'%}" method="get">-->
-<!--        <input name="tag_name" type="hidden" value="{{tag.name}}">-->
-<!--        <p>{{tag.name}}</p>-->
-<!--        <button type="submit">Submit</button>-->
-<!--    </form>-->
-<!--    {% endfor %}-->
-<!--    <br>-->
-<!--    {% for product in products %}-->
-<!--        <p>{{ product.name }}</p>-->
-<!--    {% endfor %}-->
-<!--</body>-->
-<!--</html>-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>All Products</title>
+</head>
+<body>
+
 
 
 {% load static %}
@@ -70,7 +57,9 @@
                                     <ul id="navigation">
                                         <li><a href="/product_list">Products Details</a></li>
                                         <li><a href="/create_order">Create Order</a></li>
-                                        <li><a href="/products_by_tag">Tag</a></li>
+                                        {% for i in tags%}
+                                            <li><a href="products_by_tag/{{i.name}}">{{i.name}}</a></li>
+                                        {% endfor %}
                                         </li>
                                     </ul>
                                 </nav>

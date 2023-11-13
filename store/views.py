@@ -5,8 +5,8 @@ from .models import *
 from .forms import OrderForm
 
 def all_products(request):
-    products = ProductCL.objects.all()
-    return render(request, 'all_products.html', {'products': products})
+    tags = TagCL.objects.all()
+    return render(request, 'all_products.html', {'tags': tags})
 
 
 class ProductView(ListView):
@@ -30,7 +30,6 @@ class OrderCreateView(CreateView):
 
 
 def products_by_tag(request, tag_name):
-    tag = get_object_or_404(TagCL, name=tag_name)
-    products = ProductCL.tags.filter(tag=tag)
-    context = {'products': products, 'tag': tag}
+    products = ProductCL.objects.filter(tags__name__icontains=tag_name)
+    context = {'products': products, 'tag': tag_name}
     return render(request, 'products_by_tag.html', context)
