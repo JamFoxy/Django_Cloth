@@ -15,18 +15,22 @@ class ProductView(ListView):
     template_name = 'product_list.html'
 
 
+class TagsView(ListView):
+    model = TagCL
+    queryset = TagCL.objects.all()
+    context_object_name = 'tags'
+    template_name = 'all_products.html'
+
+
 class OrderCreateView(CreateView):
     model = OrderCL
     form_class = OrderForm
     success_url = '/'
     template_name = 'create_order.html'
 
-def products_by_tag(request, tag_name=None):
-    if tag_name:
-        tag = get_object_or_404(TagCL, name=tag_name)
-        productis = ProductCL.objects.filter(tags=tag)
-    else:
-        tag = None
-        productis = ProductCL.objects.all()
 
-    return render(request, 'products_by_tag.html', {'tag': tag, 'products': productis})
+def products_by_tag(request, tag_name):
+    tag = get_object_or_404(TagCL, name=tag_name)
+    products = ProductCL.tags.filter(tag=tag)
+    context = {'products': products, 'tag': tag}
+    return render(request, 'products_by_tag.html', context)

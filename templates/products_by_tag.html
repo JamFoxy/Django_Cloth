@@ -4,10 +4,10 @@
     <title>Products by Tag</title>
 </head>
 <body>
-    <h2>Products by Tag{% if tag %}: {{ tag.name }}{% endif %}</h2>
-    {% for product in products %}
-        <p>{{ product.name }}</p>
-        <p>{{ product.tags }}</p>
-    {% endfor %}
+       <h2>Products with tag {{tag_name}} </h2>
+      {% for i in product_list %}
+        <h1>{{i.tag_name}}</h1>
+        </div>
+      {% endfor %}
 </body>
 </html>
