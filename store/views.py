@@ -33,3 +33,6 @@ def products_by_tag(request, tag_name):
     products = ProductCL.objects.filter(tags__name__icontains=tag_name)
     context = {'products': products, 'tag': tag_name}
     return render(request, 'products_by_tag.html', context)
+
+def show_error_page(request):
+    return render(request, "error.html")
